@@ -1,4 +1,8 @@
-// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Copyright (c) 2021 MediaTek Inc.
+ * Author: Sam Shih <sam.shih@mediatek.com>
+ */
 
 /dts-v1/;
 #include "mt7981.dtsi"
@@ -8,18 +12,17 @@
 / {
 	#address-cells = <1>;
 	#size-cells = <1>;
-	model = "mt7981-cmcc_rax3000m-emmc";
+	model = "mt7981-rfb";
 	compatible = "mediatek,mt7981", "mediatek,mt7981-rfb";
-
 	chosen {
 		stdout-path = &uart0;
 		tick-timer = &timer0;
 	};
 
 	config {
-		bootcmd = "mtkboardboot";
-		blink_led = "blue:status";
-		system_led = "red:status";
+		blink_led = "red";
+		system_led = "blue";
+		success_led = "green";
 	};
 
 	memory@40000000 {
@@ -27,16 +30,27 @@
 		reg = <0x40000000 0x20000000>;
 	};
 
+	reg_3p3v: regulator-3p3v {
+                  compatible = "regulator-fixed";
+                  regulator-name = "fixed-3.3V";
+                  regulator-min-microvolt = <3300000>;
+                  regulator-max-microvolt = <3300000>;
+                  regulator-boot-on;
+                  regulator-always-on;
+        };
+        
 	gpio-keys {
 		compatible = "gpio-keys";
 
-		button-reset {
+		reset {
 			label = "reset";
+			linux,code = <KEY_RESTART>;
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 		};
 
-		button-mesh {
-			label = "mesh";
+		wps {
+			label = "wps";
+			linux,code = <KEY_WPS_BUTTON>;
 			gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -44,39 +58,34 @@
 	leds {
 		compatible = "gpio-leds";
 
-		led-0 {
-			label = "green:status";
-			gpios = <&gpio 9 GPIO_ACTIVE_LOW>;
-		};
-
-		led-1 {
-			label = "blue:status";
-			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
-		};
-
-		led-2 {
-			label = "red:status";
+		led_red {
+			label = "red";
 			gpios = <&gpio 35 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+		};
+
+		led_blue {
+			label = "blue";
+			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
+			default-state = "off";
+		};
+
+		led_green {
+			label = "green";
+			gpios = <&gpio 9 GPIO_ACTIVE_LOW>;
+			default-state = "off";
 		};
 	};
+};
 
-	reg_1p8v: regulator-1p8v {
-		compatible = "regulator-fixed";
-		regulator-name = "fixed-1.8V";
-		regulator-min-microvolt = <1800000>;
-		regulator-max-microvolt = <1800000>;
-		regulator-boot-on;
-		regulator-always-on;
-	};
+&uart0 {
+	status = "okay";
+};
 
-	reg_3p3v: regulator-3p3v {
-		  compatible = "regulator-fixed";
-		  regulator-name = "fixed-3.3V";
-		  regulator-min-microvolt = <3300000>;
-		  regulator-max-microvolt = <3300000>;
-		  regulator-boot-on;
-		  regulator-always-on;
-	};
+&uart1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart1_pins>;
+	status = "disabled";
 };
 
 &eth {
@@ -92,23 +101,42 @@
 	};
 };
 
-&mmc0 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&mmc0_pins_default>;
-	bus-width = <8>;
-	max-frequency = <26000000>;
-	cap-mmc-hw-reset;
-	vmmc-supply = <&reg_3p3v>;
-	vqmmc-supply = <&reg_1p8v>;
-	non-removable;
-	status = "okay";
-};
-
 &pinctrl {
 	spic_pins: spi1-pins-func-1 {
 		mux {
 			function = "spi";
 			groups = "spi1_1";
+		};
+	};
+
+	uart1_pins: spi1-pins-func-3 {
+		mux {
+			function = "uart";
+			groups = "uart1_2";
+		};
+	};
+
+	/* pin15 as pwm0 */
+	one_pwm_pins: one-pwm-pins {
+		mux {
+			function = "pwm";
+			groups = "pwm0_1";
+		};
+	};
+
+	/* pin15 as pwm0 and pin14 as pwm1 */
+	two_pwm_pins: two-pwm-pins {
+		mux {
+			function = "pwm";
+			groups = "pwm0_1", "pwm1_0";
+		};
+	};
+
+	/* pin15 as pwm0, pin14 as pwm1, pin7 as pwm2 */
+	three_pwm_pins: three-pwm-pins {
+		mux {
+			function = "pwm";
+			groups = "pwm0_1", "pwm1_0", "pwm2";
 		};
 	};
 
@@ -138,10 +166,24 @@
 	};
 };
 
-&uart0 {
+&pwm {
+	pinctrl-names = "default";
+	pinctrl-0 = <&two_pwm_pins>;
 	status = "okay";
 };
 
 &watchdog {
 	status = "disabled";
+};
+
+&mmc0 {
+        pinctrl-names = "default";
+        pinctrl-0 = <&mmc0_pins_default>;
+        bus-width = <8>;
+        max-frequency = <52000000>;
+        cap-mmc-highspeed;
+        cap-mmc-hw-reset;
+        vmmc-supply = <&reg_3p3v>;
+        non-removable;
+        status = "okay";
 };
