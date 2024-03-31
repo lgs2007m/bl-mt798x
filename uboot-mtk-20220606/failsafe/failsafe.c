@@ -17,6 +17,7 @@
 #include <u-boot/md5.h>
 #include <dm/ofnode.h>
 #include <version_string.h>
+#include <linux/delay.h>
 
 #include "fs.h"
 
@@ -79,7 +80,7 @@ static int write_firmware_failsafe(size_t data_addr, uint32_t data_size)
 {
 	int r;
 
-	led_control("ledblink", "blink_led", "100");
+	led_control("ledblink", "system_led", "100");
 
 	switch (fw_type) {
 #if defined(CONFIG_MT7981_BOOTMENU_EMMC) || defined(CONFIG_MT7986_BOOTMENU_EMMC)
@@ -103,7 +104,7 @@ static int write_firmware_failsafe(size_t data_addr, uint32_t data_size)
 		break;
 	}
 
-	led_control("ledblink", "blink_led", "0");
+	led_control("ledblink", "system_led", "0");
 
 	return r;
 }
@@ -181,7 +182,7 @@ static void version_handler(enum httpd_uri_handler_status status,
 }
 
 #ifdef CONFIG_MEDIATEK_MULTI_MTD_LAYOUT
-#define MTD_LAYOUTS_MAXLEN	128
+#define MTD_LAYOUTS_MAXLEN 128
 
 static void mtd_layout_handler(enum httpd_uri_handler_status status,
 	struct httpd_request *request,
@@ -383,8 +384,8 @@ static void result_handler(enum httpd_uri_handler_status status,
 		/* invalidate upload identifier */
 		upload_data_id = rand();
 
-		led_control("led", "blink_led", "on");
-		led_control("led", "system_led", "off");
+		led_control("led", "blink_led", "off");
+		led_control("led", "system_led", "on");
 
 		if (!st->ret)
 			response->data = "success";
@@ -469,13 +470,28 @@ static int do_httpd(struct cmd_tbl *cmdtp, int flag, int argc,
 	char *const argv[])
 {
 	int ret;
+	const char *led = ofnode_conf_read_str("success_led");
 
 	printf("\nWeb failsafe UI started\n");
+	led_control("led", "blink_led", "off");
+	led_control("led", "system_led", "on");
 
 	ret = start_web_failsafe();
 
-	if (upgrade_success)
+	if (upgrade_success){
+		if (!led){
+			led_control("led", "blink_led", "on");
+			led_control("led", "system_led", "on");
+		} else {
+			led_control("led", "system_led", "off");
+			led_control("led", "success_led", "on");
+		}
+		mdelay(3000);
 		do_reset(NULL, 0, 0, NULL);
+	} else {
+		led_control("led", "system_led", "off");
+		led_control("led", "blink_led", "on");
+	}
 
 	return ret;
 }

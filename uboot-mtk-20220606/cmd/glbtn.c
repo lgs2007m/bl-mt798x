@@ -53,7 +53,7 @@ static int do_glbtn(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[
 	struct udevice *dev;
 	ulong ts;
 
-	led_control("ledblink", "blink_led", "250");
+	led_control("ledblink", "blink_led", "50");
 
 	gpio_power_clr();
 
@@ -96,7 +96,7 @@ static int do_glbtn(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[
 		led_control("led", "system_led", "on");
 		run_command("httpd", 0);
 	} else {
-		led_control("ledblink", "blink_led", "0");
+		led_control("led", "blink_led", "on");
 	}
 
 	return CMD_RET_SUCCESS;

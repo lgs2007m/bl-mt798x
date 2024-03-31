@@ -648,7 +648,8 @@ static int httpd_handle_request(struct httpd_instance *inst,
 		free(boundary);
 	}
 
-	led_control("ledblink", "blink_led", "0");
+	led_control("ledblink", "system_led", "0");
+	led_control("led", "system_led", "on");
 
 	/* call uri handler */
 	assert((size_t) req->urih->cb > CONFIG_SYS_SDRAM_BASE);
@@ -691,7 +692,7 @@ static void httpd_rx(struct httpd_instance *inst, struct tcb_cb_data *cbd)
 	u8 sip[4];
 
 	if (pdata->status == HTTPD_S_NEW) {
-		led_control("ledblink", "blink_led", "100");
+		led_control("ledblink", "system_led", "100");
 
 		memcpy(sip, &cbd->sip, 4);
 		debug("New connection from %d.%d.%d.%d:%d\n",
