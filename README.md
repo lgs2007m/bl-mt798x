@@ -21,3 +21,9 @@ SOC=mt7986 BOARD=jdcloud_re-cp-03 ./build.sh
 The cmcc_rax3000m-emmc and cmcc_xr30 only need to flash FIP, the FIP only support single boot, IP is 192.168.1.1  
 The jdcloud_re-cp-03 need to flash **both BL2 and FIP**, the FIP only support single boot, IP is 192.168.1.1  
 
+## Generate GPT with python2.7
+```
+cd bl-mt798x000/atf-20231013-0ea67d76a/tools/dev/gpt_editor
+./generate_gpt.sh
+```
+The GPT binaries will be located in this directory: /atf-20231013-0ea67d76a/tools/dev/gpt_editor/gpt_output.

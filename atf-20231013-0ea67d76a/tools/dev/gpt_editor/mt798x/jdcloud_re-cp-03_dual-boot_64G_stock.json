@@ -1,0 +1,92 @@
+{
+	"gpt": {
+		"start": 0,
+		"end" : 33,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{69211c02-46a9-11ed-9ceb-a4dcbef13f32}"
+	},
+
+	"u-boot-env" : {
+		"start": 8192,
+		"end" : 9215,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{19a4763a-6b19-4a4b-a0c4-8cc34f4c2ab9}"
+	},
+
+	"factory" : {
+		"start": 9216,
+		"end" : 13311,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{8142c1b2-1697-41d9-b1bf-a88d76c7213f}"
+	},
+
+	"fip": {
+		"start": 13312,
+		"end" : 17407,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{18de6587-4f17-4e08-a6c9-d9d3d424f4c5}"
+	},
+
+	"kernel" : {
+		"start": 17408,
+		"end" : 50175,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{971f7556-ef1a-44cd-8b28-0cf8100b9c7e}"
+	},
+
+	"rootfs" : {
+		"start": 50176,
+		"end" : 152575,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{309a3e76-270b-41b2-b5d5-ed8154e7542b}"
+	},
+
+	"kernel2" : {
+		"start": 152576,
+		"end" : 185343,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{9c8e460f-7160-4c25-a420-e7deeb10d5d3}"
+	},
+
+	"rootfs2" : {
+		"start": 185344,
+		"end" : 287743,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{508b8f82-164c-4898-8edc-adaa59438cd4}"
+	},
+
+	"rootfs_data" : {
+		"start": 287744,
+		"end" : 390143,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{dd18c072-adb3-412b-bf97-37617b01adf3}"
+	},
+
+	"log" : {
+		"start": 390144,
+		"end" : 524287,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{2d18c070-adb6-412b-bf90-37617b01adf5}"
+	},
+
+	"plugin" : {
+		"start": 524288,
+		"end" : 2621439,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{3d18c075-adb0-412b-bf92-37617b01adf6}"
+	},
+
+	"swap" : {
+		"start": 2621440,
+		"end" : 4718591,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{4d18c079-adb2-412b-bf93-37617b01adf7}"
+	},
+
+	"storage" : {
+		"start": 4718592,
+		"end" : 119537663,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{5d18c072-adb3-412b-bf95-37617b01adf8}"
+	}
+}

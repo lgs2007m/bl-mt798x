@@ -1,0 +1,57 @@
+{
+	"u-boot-env" : {
+		"start": 8192,
+		"end" : 9215,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{19a4763a-6b19-4a4b-a0c4-8cc34f4c2ab9}"
+	},
+
+	"factory" : {
+		"start": 9216,
+		"end" : 13311,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{8142c1b2-1697-41d9-b1bf-a88d76c7213f}"
+	},
+
+	"fip": {
+		"start": 13312,
+		"end" : 17407,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{18de6587-4f17-4e08-a6c9-d9d3d424f4c5}"
+	},
+
+	"kernel" : {
+		"start": 17408,
+		"end" : 50175,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{971f7556-ef1a-44cd-8b28-0cf8100b9c7e}"
+	},
+
+	"rootfs" : {
+		"start": 50176,
+		"end" : 2147327,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{309a3e76-270b-41b2-b5d5-ed8154e7542b}"
+	},
+
+	"log" : {
+		"start": 2147328,
+		"end" : 2281471,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{2d18c070-adb6-412b-bf90-37617b01adf5}"
+	},
+
+	"plugin" : {
+		"start": 2281472,
+		"end" : 4378623,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{3d18c075-adb0-412b-bf92-37617b01adf6}"
+	},
+
+	"swap" : {
+		"start": 4378624,
+		"end" : 6475775,
+		"part_type_guid" : "{0fc63daf-8483-4772-8e79-3d69d8477de4}",
+		"unique_part_guid" : "{4d18c079-adb2-412b-bf93-37617b01adf7}"
+	}
+}
