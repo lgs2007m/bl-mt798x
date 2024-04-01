@@ -12,18 +12,19 @@ sudo apt install gcc-aarch64-linux-gnu build-essential flex bison libssl-dev
 ```
 
 ## Build UBOOT
-Attention: Only used for **jdcloud_re-cp-03** and **cmcc_rax3000m-emmc**, DO NOT compile other targets.
+Attention: Only use for **jdcloud_re-cp-03**, **cmcc_rax3000m-emmc** and **cmcc_xr30**. DO NOT compile for other targets.
 ```
 SOC=mt7981 BOARD=cmcc_rax3000m-emmc ./build.sh
 SOC=mt7981 BOARD=cmcc_xr30 ./build.sh
 SOC=mt7986 BOARD=jdcloud_re-cp-03 ./build.sh
 ```
-The cmcc_rax3000m-emmc and cmcc_xr30 only need to flash FIP, the FIP only support single boot, IP is 192.168.1.1  
-The jdcloud_re-cp-03 need to flash **both BL2 and FIP**, the FIP only support single boot, IP is 192.168.1.1  
+The FIP only support single boot, IP is 192.168.1.1  
+The cmcc_rax3000m-emmc and cmcc_xr30 only need to flash FIP.   
+The jdcloud_re-cp-03 need to flash **both BL2 and FIP**, only flashing FIP would cause the device to brick!   
 
 ## Generate GPT with python2.7
 ```
-cd bl-mt798x000/atf-20231013-0ea67d76a/tools/dev/gpt_editor
+cd bl-mt798x/atf-20231013-0ea67d76a/tools/dev/gpt_editor
 ./generate_gpt.sh
 ```
-The GPT binaries will be located in this directory: /atf-20231013-0ea67d76a/tools/dev/gpt_editor/gpt_output.
+The GPT binaries will be located in this directory: bl-mt798x/atf-20231013-0ea67d76a/tools/dev/gpt_editor/gpt_output
