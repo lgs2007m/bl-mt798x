@@ -15,11 +15,11 @@ sudo apt install gcc-aarch64-linux-gnu build-essential flex bison libssl-dev
 Attention: Only use for **jdcloud_re-cp-03**, **cmcc_rax3000m-emmc** and **cmcc_xr30**. DO NOT compile for other targets.
 ```
 SOC=mt7981 BOARD=cmcc_rax3000m-emmc ./build.sh
-SOC=mt7981 BOARD=cmcc_xr30 ./build.sh
+SOC=mt7981 BOARD=cmcc_xr30-emmc ./build.sh
 SOC=mt7986 BOARD=jdcloud_re-cp-03 ./build.sh
 ```
 The FIP only support single boot, IP is 192.168.1.1  
-The cmcc_rax3000m-emmc and cmcc_xr30 only need to flash FIP.   
+The cmcc_rax3000m-emmc and cmcc_xr30-emmc only need to flash FIP.   
 The jdcloud_re-cp-03 need to flash **both BL2 and FIP**, only flashing FIP would cause the device to brick!   
 
 ## Generate GPT with python2.7
