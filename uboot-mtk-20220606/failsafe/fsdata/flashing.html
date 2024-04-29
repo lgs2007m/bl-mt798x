@@ -17,22 +17,11 @@
 							location = '/fail.html'
 							return
 						}
-
 						document.getElementById('title').innerHTML = 'UPGRADE COMPLETE!'
 						document.getElementById('info').innerHTML = 'Your device was successfully Upgraded! Now Rebooting...'
 					},
 					timeout: 30000
 				})
-
-				ajax('/result', function(response) {
-					if (response == 'failed') {
-						location = '/fail.html'
-						return
-					}
-
-					document.getElementById('title').innerHTML = 'UPGRADE COMPLETE!'
-					document.getElementById('info').innerHTML = 'Your device was successfully Upgraded! Now Rebooting...'
-				}, 30000)
 			}
 		</script>
 	</head>
